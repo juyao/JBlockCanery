@@ -17,7 +17,7 @@
         </activity>
 
         <provider
-            android:authorities="block_provider"
+            android:authorities="${applicationId}.provider"
             android:name=".BlockProvider" />
 
         <provider
