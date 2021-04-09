@@ -1,0 +1,68 @@
+//def group ='com.jandroid.library'
+//def version ='0.0.2-SNAPSHOT'
+//def artifactId = 'ui'
+
+apply plugin: 'maven'
+apply plugin: 'kotlin-android'
+
+configurations {
+    deployerJars
+}
+
+repositories {
+    mavenCentral()
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: 'https://packages.aliyun.com/maven/repository/2089419-release-C5Mia5/') {
+                authentication(
+                        userName: '605e9b0368e8851ace7b2f30',
+                        password: '1BPYsQvtIpXL'
+                )
+            }
+            snapshotRepository(url: 'https://packages.aliyun.com/maven/repository/2089419-snapshot-0hLDyC/') {
+                authentication(
+                        userName: '605e9b0368e8851ace7b2f30',
+                        password: '1BPYsQvtIpXL'
+                )
+            }
+            pom.version = '0.0.1-SNAPSHOT'
+            pom.artifactId = 'jblockcanary'
+            pom.groupId = 'com.jandroid.library'
+        }
+    }
+}
+/**
+ * type显示指定任务类型或任务, 这里指定要执行Javadoc这个task,这个task在gradle中已经定义
+ */
+task androidJavadocs(type: Javadoc) {
+    // 设置源码所在的位置
+    source = android.sourceSets.main.java.sourceFiles
+}
+
+/**
+ * 生成javadoc.jar
+ */
+task androidJavadocsJar(type: Jar) {
+    // 指定文档名称
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+/**
+ * 打包main目录下代码和资源的task，生成sources.jar
+ */
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.sourceFiles
+}
+
+/**
+ * 配置需要上传到maven仓库的文件
+ */
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+}

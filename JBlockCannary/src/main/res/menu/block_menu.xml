@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/delete"
+        android:icon="@drawable/icon_delete"
+        android:title="清空记录"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/export"
+        android:icon="@drawable/icon_export"
+        android:title="导出分享"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/limit"
+        android:icon="@drawable/icon_limit"
+        android:title="修改阈值"
+        app:showAsAction="never" />
+
+</menu>
